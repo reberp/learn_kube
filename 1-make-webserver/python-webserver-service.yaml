@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: py-srv-ser
+spec:
+  selector:
+    app: py-srv
+  ports:
+  - protocol: TCP
+    port: 32321
+    nodePort: 32321
+    targetPort: 8080
+  type: NodePort
