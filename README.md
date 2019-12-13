@@ -19,7 +19,7 @@ liveness, more than one of control and data planes, secrets
 secret stoage w/ vault and use (off cluster probably w/ exposed port) 
 
 3: dB  
-add a mysql dB (off cluster w/ docker and exposed port, just pretend) and have server talk to that
+add a mysql dB (off cluster w/ docker and exposed port, just pretend) and have server talk to that, maybe use helm requirement for mysql and put onto cluster? 
 
 5: native dB  
 vitess
