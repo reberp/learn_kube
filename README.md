@@ -13,7 +13,7 @@ get kubernetes for server and service with deployment on minikube
 turn into helm chart to do things from 1
 
 4: more k8s  
-liveness, more than one of control and data planes, secrets, pod security policies
+liveness, secrets, pod security policies
 
 4: get ready for dB  
 secret stoage w/ vault and use (off cluster probably w/ exposed port) 
