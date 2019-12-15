@@ -67,4 +67,4 @@ affinity: {}
 
 mysql:
   enabled: true
-  image: "temp"
+  #image: "temp"

@@ -35,5 +35,8 @@ spec:
         image: praet/python-flask:1-make-server
         ports:
         - containerPort: 8080
+        env: 
+        - name: RELEASE_NAME
+          value: {{ .Release.Name }}
 
 
