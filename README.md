@@ -12,16 +12,16 @@ get kubernetes for server and service with deployment on minikube
 2: helm  
 turn into helm chart to do things from 1
 
-4: more k8s  
+3: more k8s  
 liveness, secrets, pod security policies
 
 4: get ready for dB  
 secret stoage w/ vault and use (off cluster probably w/ exposed port) 
 
-3: dB  
+5: dB  
 add a mysql dB (off cluster w/ docker and exposed port, just pretend) and have server talk to that, maybe use helm requirement for mysql and put onto cluster? 
 
-5: native dB  
+6: native dB  
 vitess
 
 : storage

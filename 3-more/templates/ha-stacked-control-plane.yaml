@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-cp-lb
+spec:
+  selector:
+    app: control-plane
+  ports:
+  - protocol: TCP
+    port: 32324
+    nodePort: 32324
+    targetPort: 6443
+  type: NodePort
+
