@@ -68,3 +68,5 @@ affinity: {}
 mysql:
   enabled: true
   #image: "temp"
+
+SERVER_PORT: "8080"
