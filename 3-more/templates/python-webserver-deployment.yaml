@@ -1,11 +1,10 @@
-#So configmap gets mad trying to pull values from file the same way I'm doing in the pod {{value...}}, 
-#but the pod doesn't seem to be able to pull it from the configmap either. Not sure what the right way to get only one value here is?
+#got it all to be defined outside this file but I can't seem to get the configmap and the values serverport to be defined in the same place?
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-cm
 data:
-  SERVER_PORT: "8080"
+{{ .Files.Get "config.json" | indent 2}}
 
 ---
 
@@ -45,7 +44,7 @@ spec:
       - name: {{ .Release.Name }}
         image: praet/python-flask:3-more
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.SERVER_PORT }}
         env: 
         - name: RELEASE_NAME
           value: {{ .Release.Name }}
@@ -53,7 +52,7 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: {{ .Release.Name }}-cm
-              key: SERVER_PORT
+              key: SERVER_PORT_CONFIG
         livenessProbe:
           httpGet:
             path: /
