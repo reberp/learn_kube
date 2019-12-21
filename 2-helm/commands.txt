@@ -1,6 +1,7 @@
 install helm
 helm create .
 helm install 2-helm .
+helm dependency update
 switch names to template
 reinstall with --generate-name
 https://helm.sh/docs/intro/getting_started/

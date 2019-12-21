@@ -1,10 +1,11 @@
-#got it all to be defined outside this file but I can't seem to get the configmap and the values serverport to be defined in the same place?
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-cm
 data:
-{{ .Files.Get "config.json" | indent 2}}
+  password: {{ .Values.mysql.mysqlRootPassword }}
+  SERVER_PORT_CONFIG: {{ .Values.SERVER_PORT | quote }}  
+#{{ .Files.Get "config.json" | indent 2}}
 
 ---
 
@@ -14,7 +15,7 @@ metadata:
   name: {{ .Release.Name }}-service
 spec:
   selector:
-    app: py-srv
+    app: {{ .Release.Name }}-webserver
   ports:
   - protocol: TCP
     port: 32321
@@ -24,21 +25,32 @@ spec:
 
 ---
 
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secrets
+type: Opaque
+data:
+  rootPassword: {{ .Values.mysql.mysqlRootPassword | b64enc }}
+  rootUsername: {{ .Values.mysql.mysqlRootUsername | b64enc }}
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-dep
   labels:
-    app: {{ .Release.Name }}
+    app: {{ .Release.Name }}-webserver
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ .Release.Name }}-webserver
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ .Release.Name }}-webserver
     spec:
       containers:
       - name: {{ .Release.Name }}
@@ -53,6 +65,17 @@ spec:
             configMapKeyRef:
               name: {{ .Release.Name }}-cm
               key: SERVER_PORT_CONFIG
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets
+              key: rootPassword
+        - name: MYSQL_ROOT_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets
+              key: rootUsername
+
         livenessProbe:
           httpGet:
             path: /

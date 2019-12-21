@@ -68,5 +68,10 @@ affinity: {}
 mysql:
   enabled: true
   #image: "temp"
+  mysqlRootPassword: "password"
+  mysqlDatabase: "test"
+  mysqlRootUsername: "root"
+  #make password into a secret
+
 
 SERVER_PORT: "8080"
