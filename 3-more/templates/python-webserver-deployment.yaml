@@ -52,6 +52,10 @@ spec:
       labels:
         app: {{ .Release.Name }}-webserver
     spec:
+      hostAliases:
+      - ip: {{ .Values.hostIP }}
+        hostnames:
+        - {{ .Values.hostName }}
       containers:
       - name: {{ .Release.Name }}
         image: praet/python-flask:3-more
@@ -75,7 +79,6 @@ spec:
             secretKeyRef:
               name: mysql-secrets
               key: rootUsername
-
         livenessProbe:
           httpGet:
             path: /
