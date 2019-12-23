@@ -1,0 +1,11 @@
+from python:3-buster
+
+RUN apt-get update && apt-get upgrade -y
+RUN pip3 install flask
+RUN pip3 install requests
+RUN pip3 install flask_mysqldb
+RUN pip3 install mysql.connector
+COPY server.py /server.py
+ENTRYPOINT ["python3","server.py"]
+
+

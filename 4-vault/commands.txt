@@ -1,0 +1,7 @@
+install helm
+helm create .
+helm install 2-helm .
+switch names to template
+reinstall with --generate-name
+https://helm.sh/docs/intro/getting_started/
+https://gist.github.com/tuannvm/4e1bcc993f683ee275ed36e67c30ac49
