@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-vault-service
+spec:
+  selector:
+    app: {{ .Release.Name }}-vault-pod
+  ports:
+  - protocol: TCP
+    port: {{ .Values.vault.servicePort }}
+    nodePort: {{ .Values.vault.servicePort }}
+    targetPort: {{ .Values.vault.targetPort }}
+  type: NodePort
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-vault-pod
+  labels:
+    app: {{ .Release.Name }}-vault-pod
+spec:
+  containers:
+  - name: {{ .Release.Name }}-vault-pod
+    image: vault:latest
+    securityContext:
+      capabilities:
+        add: ["IPC_LOCK"]
+    ports:
+    - containerPort: {{ .Values.vault.targetPort }}
+    env: 
+    - name: VAULT_DEV_ROOT_TOKEN_ID
+      value: {{ .Values.vault.vaultToken }}
+    - name: VAULT_DEV_LISTEN_ADDRESS
+      value: "0.0.0.0:8200" 
+      #how to concat values? 
+    - name: VAULT_ADDR
+      value: "0.0.0.0:8200"
+
+---
+
