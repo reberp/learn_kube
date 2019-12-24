@@ -1,0 +1,11 @@
+from vault:latest
+ARG vault_token_arg=test
+ENV VAULT_DEV_ROOT_TOKEN_ID=$vault_token_arg
+copy cmd.sh cmd.sh
+RUN chmod 777 cmd.sh
+
+ENV VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200
+ENV VAULT_ADDR=http://127.0.0.1:8200
+#ENV VAULT_DEV_ROOT_TOKEN_ID=test
+
+ENTRYPOINT ["./cmd.sh"]
