@@ -19,6 +19,7 @@ liveness, configmap, values, secrets, pod security policies
 * make vault  
 * make secrets for mysql password in vault and make a service for vault 
 * helm chart for vault 
+// basically got all that to work, but manually. I don't really know how to manually get the info to config the vault auth from kubernetes from the vault image. Like it needs kubectl and vault CLI?
 
 4: get ready for dB  
 secret stoage w/ vault and use (off cluster probably w/ exposed port) 
