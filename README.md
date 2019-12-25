@@ -18,8 +18,9 @@ liveness, configmap, values, secrets, pod security policies
 4: vault and secrets
 * make vault  
 * make secrets for mysql password in vault and make a service for vault 
-* helm chart for vault 
-// basically got all that to work, but manually. I don't really know how to manually get the info to config the vault auth from kubernetes from the vault image. Like it needs kubectl and vault CLI?
+* helm chart for vault  
+// basically got all that to work, but manually. I don't really know how to manually get the info to config the vault auth from kubernetes from the vault image. Like it needs kubectl and vault CLI?  
+// and even then, how does the python actually grab the stuff? I can use the consul thing to fill afile, but it would have to have a bunch of other stuff to get updated after TTL? 
 
 4: get ready for dB  
 secret stoage w/ vault and use (off cluster probably w/ exposed port) 
